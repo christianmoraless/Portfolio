@@ -5,7 +5,13 @@ import { styles } from "../styles";
 import { services } from "../constants";
 import { fadeIn, textVariant } from "../util/motion";
 import { SectionWrapper } from "../hoc";
+
+interface DivProps extends React.HTMLProps<HTMLDivElement> {
+  name?: string;
+}
+
 const ServiceCard = ({ index, title, icon }) => {
+  const divProps: DivProps = { name: "options" };
   return (
     <Tilt className="xs:w-[250px] w-full">
       <motion.div
@@ -13,11 +19,7 @@ const ServiceCard = ({ index, title, icon }) => {
         className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
       >
         <div
-          options={{
-            max: 45,
-            scale: 1,
-            speed: 450,
-          }}
+          {...divProps}
           className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
         >
           <img
@@ -71,4 +73,4 @@ const About = () => {
   );
 };
 
-export default SectionWrapper(About, "about");
+export default About;

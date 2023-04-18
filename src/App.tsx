@@ -10,6 +10,7 @@ import {
   Tech,
   Works,
 } from "./components";
+import { SectionWrapper } from "./hoc";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
           <Hero />
         </div>
       </div>
-      <About />
+      <SectionWrapper idName="about">
+        <About />
+      </SectionWrapper>
       <Experience />
       <Tech />
       <Works />
