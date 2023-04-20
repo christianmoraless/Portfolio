@@ -5,7 +5,6 @@ import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../util/motion";
-
 const Contact = () => {
   const formRef = useRef();
 
@@ -16,9 +15,40 @@ const Contact = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    emailjs
+      .send(
+        "service_kk7x9wr",
+        "template_vvexx4l",
+        {
+          from_name: form.name,
+          to_name: "Christian",
+          from_email: form.email,
+          to_email: "christiandmoraless@gmail.com",
+          message: form.message,
+        },
+        "CSrD0J6b0VhadL0Fi"
+      )
+      .then(
+        () => {
+          setLoading(false);
+          alert("Thank you. I will get back to you as soon as possible");
+          setForm({ name: "", email: "", message: "" });
+        },
+        (error) => {
+          setLoading(false);
+          console.log(error);
+          alert("Something went wrong");
+        }
+      );
+  };
 
   return (
     <SectionWrapper idName="contact">
